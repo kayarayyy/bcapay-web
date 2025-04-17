@@ -1,0 +1,43 @@
+<div class="d-flex flex-column p-3 h-100" style="width: 250px;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+    <span class="fs-4 fw-bold">BCA Pay</span>
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a routerLink="/dashboard/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
+        <i class="bi bi-speedometer2 me-2"></i>
+        Dashboard
+      </a>
+    </li>
+    <li *ngIf="hasFeature('FEATURE_MANAGE_LOAN_REQUESTS')">
+      <a routerLink="/dashboard/loan-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
+        <i class="bi bi-journal-text me-2"></i>
+        Loan Requests
+      </a>
+    </li>
+    <li *ngIf="hasFeature('FEATURE_MANAGE_USERS')">
+      <a routerLink="/dashboard/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
+        <i class="bi bi-person-lines-fill me-2"></i>
+        Users
+      </a>
+    </li>
+    <li *ngIf="hasFeature('FEATURE_MANAGE_ROLES')">
+      <a routerLink="/dashboard/roles" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
+        <i class="bi bi-shield-lock me-2"></i>
+        Roles
+      </a>
+    </li>
+    <li *ngIf="hasFeature('FEATURE_MANAGE_BRANCHES')">
+      <a routerLink="/dashboard/branches" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
+        <i class="bi bi-building me-2"></i>
+        Branches
+      </a>
+    </li>
+  </ul>
+  <hr />
+  <div class="text-muted small">
+    &copy; 2025 BCA Pay
+  </div>
+</div>

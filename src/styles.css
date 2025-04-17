@@ -1,0 +1,10 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+/* Misalnya di styles.css atau file CSS global */
+.active {
+  font-weight: bold;
+  color: #007bff; /* Bisa diganti dengan warna lain jika diperlukan */
+  background-color: #f0f8ff; /* Tambahkan highlight latar belakang jika diinginkan */
+}
