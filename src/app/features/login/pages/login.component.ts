@@ -26,6 +26,7 @@ export class LoginComponent {
     this.isLoading = true;
 
     const success = await this.auth.login(this.nip, this.password);
+    console.log(success);
 
     if (success) {
       this.router.navigate(['/dashboard']);
