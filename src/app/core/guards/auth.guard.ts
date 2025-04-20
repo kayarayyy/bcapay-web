@@ -7,12 +7,11 @@ export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
   const session = inject(AuthSessionService);
 
-  // ✅ Cek aman apakah berjalan di browser
-  if (typeof window !== 'undefined' && session.token) {
+  if (typeof window !== 'undefined' && session.token && !session.isTokenExpired) {
     return true;
   }
 
-
+  session.clearSession(); // kalau expired, clear session
   router.navigate(['/login']);
   return false;
 };

@@ -26,8 +26,25 @@ export class AuthSessionService {
     return this.auth?.features || [];
   }
 
-  clearSession() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('auth');
+  get isTokenExpired(): boolean {
+    const token = this.token;
+    if (!token) return true;
+  
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp;
+      const now = Math.floor(Date.now() / 1000); // dalam detik
+      return expiry < now;
+    } catch (e) {
+      return true; // kalau parsing gagal, anggap expired
+    }
   }
+
+  clearSession() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('auth');
+    }
+  }
+  
 }

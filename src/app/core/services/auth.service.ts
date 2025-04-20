@@ -15,7 +15,6 @@ export class AuthService {
       const response = await firstValueFrom(
         this.http.post<any>('http://localhost:8080/api/v1/auth/login-employee', payload)
       );
-      console.log(response);
 
       const data = response.data;
 
@@ -31,7 +30,6 @@ export class AuthService {
       localStorage.setItem('auth', JSON.stringify(user));
       return true;
     } catch (error) {
-      console.error('Login gagal:', error);
       return false;
     }
   }

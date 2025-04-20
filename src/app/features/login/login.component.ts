@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +26,11 @@ export class LoginComponent {
     this.isLoading = true;
 
     const success = await this.auth.login(this.nip, this.password);
-    console.log(success);
 
     if (success) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard'], {
+        state: { showWelcome: true }
+      });
     } else {
       Swal.fire({
         icon: 'error',

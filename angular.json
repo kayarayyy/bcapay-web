@@ -31,12 +31,15 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
               "node_modules/@swimlane/ngx-datatable/themes/material.css",
               "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
               "node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.js",
+  "node_modules/datatables.net/js/dataTables.min.js"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",

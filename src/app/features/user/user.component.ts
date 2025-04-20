@@ -1,36 +1,48 @@
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../../core/models/user.model';
-import { UserService } from '../../../core/services/user.service';
+import { DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { User } from '../../core/models/user.model';
+import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { CardComponent } from '../../layout/card-layout/card/card.component';
+import { FormsModule } from '@angular/forms';
+import { TableComponent } from '../../layout/table-layout/table/table.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [NgxDatatableModule, CommonModule],
+  imports: [CardComponent, TableComponent],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
   isLoading = true;
-  error = '';
   pageOffset = 0;
 
-  constructor(private userService: UserService) {}
+  columns = [
+    { header: 'Name', field: 'name' },
+    { header: 'Nip', field: 'nip' },
+    { header: 'Email', field: 'email' },
+    { header: 'Role', field: 'role' },
+    { header: 'Referral', field: 'refferal' },
+    { header: 'Status', field: 'status' }
+  ];
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
-        this.users = res;
+        this.users = res.map(user => ({
+          ...user
+        }));
         this.isLoading = false;
       },
-      error: (err) => {
-        this.error = 'Gagal memuat data user';
+      error: () => {
         this.isLoading = false;
-        console.error(err);
-      },
+      }
     });
   }
 
@@ -38,20 +50,10 @@ export class UserComponent implements OnInit {
     this.pageOffset = event.offset;
   }
 
-  addUser(): void {
-    console.log('Add User button clicked');
-    // buka modal atau navigasi ke halaman tambah user
-  }
-
-  updateUser(id: string): void {
-    console.log(`Update user with id: ${id}`);
-    // navigasi ke halaman edit user / buka modal form
-  }
-
-  deleteUser(id: string): void {
+  deleteUser(id: string, name: string): void {
     Swal.fire({
       title: 'Apakah Anda yakin?',
-      text: 'Data user yang dihapus tidak dapat dikembalikan!',
+      text: 'Data user ' + name + ' yang dihapus tidak dapat dikembalikan!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
