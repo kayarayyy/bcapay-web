@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { SidebarComponent } from './sidebar-layout/sidebar-layout.component';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, RouterModule } from '@angular/router';
 import { AuthSessionService } from '../../core/services/auth-session.service';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [SidebarComponent, RouterOutlet],
+  imports: [SidebarComponent, RouterOutlet, CommonModule, RouterModule],
   templateUrl: './main-layout.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class MainLayoutComponent {
   userName: string = '';
@@ -19,6 +21,17 @@ export class MainLayoutComponent {
   ngOnInit() {
     this.userName = this.session.name;
     this.userRole = this.session.role;
+
+    if (window.innerWidth <= 768) {
+      this.sidebarVisible = false;
+    }
+  }
+
+  sidebarVisible: boolean = true;
+
+  toggleSidebar() {
+    console.log(this.sidebarVisible);
+    this.sidebarVisible = !this.sidebarVisible;
   }
 
   logout(event?: MouseEvent): void {
@@ -48,5 +61,4 @@ export class MainLayoutComponent {
       }
     });
   }
-
 }

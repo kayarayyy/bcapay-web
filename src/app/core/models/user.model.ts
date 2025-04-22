@@ -6,4 +6,5 @@ export interface User {
   nip: string | null;
   refferal: string | null;
   active: boolean;
+  branch: string | null;
 }

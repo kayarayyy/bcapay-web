@@ -4,7 +4,7 @@ export interface LoanRequest {
     id: string;
     amount: number;
     interest: number | null;
-    reffera: string | null;
+    refferal: string | null;
     customer: User;
     marketing: User | null;
     marketingApprove: boolean | null;

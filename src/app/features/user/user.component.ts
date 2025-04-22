@@ -1,5 +1,5 @@
 import { DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { TableComponent } from '../../layout/table-layout/table/table.component'
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CardComponent, TableComponent],
+  imports: [CardComponent, TableComponent, CommonModule],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -20,19 +20,22 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   isLoading = true;
   pageOffset = 0;
+  columns: any[] = [];
 
-  columns = [
-    { header: 'Name', field: 'name' },
-    { header: 'Nip', field: 'nip' },
-    { header: 'Email', field: 'email' },
-    { header: 'Role', field: 'role' },
-    { header: 'Referral', field: 'refferal' },
-    { header: 'Status', field: 'status' }
-  ];
+  @ViewChild('statusTpl', { static: true }) statusTpl!: TemplateRef<any>;
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.columns = [
+      { header: 'Name', field: 'name' },
+      { header: 'Nip', field: 'nip' },
+      { header: 'Email', field: 'email' },
+      { header: 'Role', field: 'role' },
+      { header: 'Referral', field: 'refferal' },
+      { header: 'Status', field: 'active', isCustom: true, templateRef: this.statusTpl }
+    ];
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res.map(user => ({

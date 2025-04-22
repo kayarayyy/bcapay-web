@@ -90,6 +90,18 @@ h3 {
     border-top: none;
 }
 
+/* Agar tabel bisa di-scroll horizontal tanpa mempengaruhi layout */
+.table-responsive {
+  overflow-x: auto; /* Membolehkan scroll horizontal pada tabel */
+  -webkit-overflow-scrolling: touch; /* Untuk pengalaman scroll lebih halus di perangkat mobile */
+  max-width: 100%; /* Membatasi lebar tabel agar tidak melebihi container */
+}
+
+.table-responsive table {
+  width: 100%; /* Memastikan tabel mengambil seluruh lebar container */
+  table-layout: fixed; /* Membantu menghindari konten tabel yang meluap */
+}
+
 /* Responsif */
 /* .table-responsive {
     width: 100%;

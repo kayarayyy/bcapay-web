@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { Branch } from "../models/branch.model";
 import { response } from "express";
+import { environment } from "../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class BranchService {
-    private baseUrl = 'http://localhost:8080/api/v1';
+    private baseUrl = environment.apiUrl;
     constructor(private http: HttpClient) {
 
     }

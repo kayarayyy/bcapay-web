@@ -9,6 +9,9 @@ import { redirectIfLoggedInGuard } from './core/guards/redirect.guard';
 import { BranchComponent } from './features/branches/branch.component';
 import { LoanRequestComponent } from './features/loan-request/loan-request.component';
 import { RoleComponent } from './features/role/role.component';
+import { ProfileComponent } from './features/profile/profile.component';
+import { ChangePasswordComponent } from './features/change-password/change-password.component';
+import { ResetPasswordComponent } from './features/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -16,26 +19,29 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [authGuard], // ✅ lindungi MainLayout dan anak-anaknya
     children: [
-      { path: '', redirectTo: 'home', pathMatch:'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'users', component: UserComponent },
       { path: 'branches', component: BranchComponent },
       { path: 'loan-requests', component: LoanRequestComponent },
       { path: 'roles', component: RoleComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'change-password', component: ChangePasswordComponent },
     ],
   },
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
-      { path: '', redirectTo:'login', pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'login',
         component: LoginComponent,
         data: { title: 'Login' },
-        canActivate: [redirectIfLoggedInGuard]
+        canActivate: [redirectIfLoggedInGuard],
       },
+      { path: 'reset-password/:id', component: ResetPasswordComponent },
     ],
   },
-  { path: '**', redirectTo: '/login' } // catch-all fallback
+  { path: '**', redirectTo: '/login' }, // catch-all fallback
 ];

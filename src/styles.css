@@ -1,52 +1,56 @@
 :root {
-  --color-primary: #2C73D2;
-  --color-secondary: #A1B5D8;
-  --color-accent: #F6C90E;
-  --color-bg: #F4F7FC;
-  --color-text: #2E2E2E;
-  --color-text-muted: #6C757D;
+  --color-bg: #ECEFCA;
+  --color-text: #213448;
+  --color-text-muted: #547792;
+  --color-primary: #94B4C1;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: 'Poppins', 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
-.btn-primary {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-.btn-primary:hover {
-  background-color: darken(#2C73D2, 5%);
-}
-
-.btn-secondary {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
-  color: #fff;
-}
-
-.navbar,
-.sidebar {
+.navbar, .sidebar {
   background-color: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.badge-success {
-  background-color: var(--color-primary);
-}
-
-.badge-secondary {
-  background-color: #d6d8db;
-  color: var(--color-text-muted);
-}
-
-/* Warna sidebar dan link */
 .sidebar {
-  background-color: #ffffff;
-  color: var(--color-text);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.d-none {
+  transform: translateX(-100%);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content > main {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .sidebar .nav-link {
@@ -58,29 +62,33 @@ body {
 
 .sidebar .nav-link.active,
 .sidebar .nav-link:hover {
-  background-color: rgba(44, 115, 210, 0.1);
+  background-color: rgba(148, 180, 193, 0.15); /* dari #94B4C1 */
   color: var(--color-primary);
   font-weight: 500;
 }
 
 .sidebar .nav-link.active i,
 .sidebar .nav-link:hover i {
-  color: #000 !important; /* Icon berwarna hitam saat aktif atau hover */
+  color: #213448 !important;
 }
 
-/* Judul dan icon app */
 .sidebar .fs-4 {
   color: var(--color-primary);
 }
 
-/* Memastikan icon di sidebar selalu hitam jika tidak aktif */
 .sidebar .nav-link i {
-  color: var(--color-text-muted); /* Icon warna abu-abu saat tidak aktif */
+  color: var(--color-text-muted);
 }
 
-/* Menambahkan style untuk tampilan menu */
 .sidebar .nav-link.active {
   font-weight: 600;
-  background-color: rgba(44, 115, 210, 0.15); /* Latar belakang saat menu aktif */
+  background-color: rgba(148, 180, 193, 0.25);
 }
 
+/* Scrollbar disembunyikan */
+.main-content::-webkit-scrollbar {
+  display: none;
+}
+.main-content {
+  -ms-overflow-style: none;
+}

@@ -1,0 +1,63 @@
+:root {
+  --color-bg: #ECEFCA;
+  --color-dark: #213448;
+  --color-accent: #547792;
+  --color-primary: #94B4C1;
+  --color-white: #ffffff;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+}
+
+.sidebar {
+  background-color: var(--color-dark) !important;
+  color: var(--color-white);
+}
+
+.sidebar .fs-4 {
+  color: var(--color-primary);
+}
+
+.sidebar .nav-link {
+  color: var(--color-white);
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: rgba(148, 180, 193, 0.2);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.sidebar .nav-link i {
+  color: var(--color-white);
+}
+
+.sidebar .nav-link.active i,
+.sidebar .nav-link:hover i {
+  color: var(--color-primary);
+}
+
+.navbar {
+  background-color: var(--color-white) !important;
+  border-bottom: 1px solid #ccc;
+  color: var(--color-dark);
+}
+
+.navbar .dropdown-toggle,
+.navbar .dropdown-menu {
+  color: var(--color-dark);
+}
+
+.navbar .dropdown-menu {
+  border-color: var(--color-primary);
+}
+
+.main-content > main {
+  background-color: var(--color-bg);
+}

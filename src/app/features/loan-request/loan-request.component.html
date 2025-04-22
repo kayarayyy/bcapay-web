@@ -2,6 +2,64 @@
   <app-table [columns]="columns" [originalRows]="loan_requests" [isLoading]="isLoading" [pageOffset]="pageOffset"
     (onPage)="onPage($event)" [actionTemplate]="actionTpl"></app-table>
   <ng-template #actionTpl let-row>
-    <button class="btn btn-danger btn-sm" (click)="deleteLoanRequest(row.id)">Delete</button>
+    <button *ngIf="hasFeature('FEATURE_MARKETING_REVIEW')" class="btn btn-info btn-sm" (click)="reviewRequest(row.id)">Review</button>
+    <button *ngIf="hasFeature('FEATURE_MANAGE_LOAN_REQUESTS')" class="btn btn-warning btn-sm" (click)="reviewRequest(row.id)">Update</button>
+    <button *ngIf="hasFeature('FEATURE_MANAGE_LOAN_REQUESTS')" class="btn btn-danger btn-sm" (click)="reviewRequest(row.id)">Delete</button>
   </ng-template>
+
+  <ng-template #reviewTpl let-row>
+    <span class="badge"
+      [ngClass]="
+        row.marketingApprove === true
+          ? 'bg-success'
+          : row.marketingApprove === false
+          ? 'bg-danger'
+          : 'bg-warning'
+      ">
+      {{
+        row.marketingApprove === true
+          ? 'Approved'
+          : row.marketingApprove === false
+          ? 'Rejected'
+          : 'Waiting'
+      }}
+    </span>
+  </ng-template>
+  <ng-template #approvalTpl let-row>
+    <span class="badge"
+      [ngClass]="
+        row.branchManagerApprove === true
+          ? 'bg-success'
+          : row.branchManagerApprove === false
+          ? 'bg-danger'
+          : 'bg-warning'
+      ">
+      {{
+        row.branchManagerApprove === true
+          ? 'Approved'
+          : row.branchManagerApprove === false
+          ? 'Rejected'
+          : 'Waiting'
+      }}
+    </span>
+  </ng-template>
+  <ng-template #disbursementTpl let-row>
+    <span class="badge"
+      [ngClass]="
+        row.backOfficeApprove === true
+          ? 'bg-success'
+          : row.backOfficeApprove === false
+          ? 'bg-danger'
+          : 'bg-warning'
+      ">
+      {{
+        row.backOfficeApprove === true
+          ? 'Approved'
+          : row.backOfficeApprove === false
+          ? 'Rejected'
+          : 'Waiting'
+      }}
+    </span>
+  </ng-template>
+
 </app-card>

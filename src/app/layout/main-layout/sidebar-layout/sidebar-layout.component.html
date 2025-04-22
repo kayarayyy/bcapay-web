@@ -11,7 +11,7 @@
         Dashboard
       </a>
     </li>
-    <li *ngIf="hasFeature('FEATURE_MANAGE_LOAN_REQUESTS')">
+    <li *ngIf="hasFeature('FEATURE_MANAGE_LOAN_REQUESTS') || hasFeature('FEATURE_MARKETING_REVIEW')">
       <a routerLink="/dashboard/loan-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-dark">
         <i class="bi bi-journal-text me-2"></i>
         Loan Requests
