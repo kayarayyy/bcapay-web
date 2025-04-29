@@ -1,37 +1,35 @@
 import {
   Component,
-  ElementRef,
-  ViewChild,
+  EventEmitter,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { SidebarComponent } from './sidebar-layout/sidebar-layout.component';
-import { RouterOutlet, Router, RouterModule } from '@angular/router';
-import { AuthSessionService } from '../../core/services/auth-session.service';
+import { AuthSessionService } from '../../../core/services/auth-session.service';
+import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar-layout/navbar-layout.component';
 
 @Component({
-  selector: 'app-main-layout',
-  standalone: true,
-  imports: [
-    SidebarComponent,
-    NavbarComponent,
-    RouterOutlet,
-    CommonModule,
-    RouterModule,
-  ],
-  templateUrl: './main-layout.component.html',
+  selector: 'app-navbar',
+  imports: [RouterModule],
+  templateUrl: './navbar-layout.component.html',
+  styleUrl: './navbar-layout.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class MainLayoutComponent {
-
+export class NavbarComponent {
+  @Output() toggleSidebarEvent = new EventEmitter<void>();
+  userName: string = '';
+  userRole: string = '';
 
   constructor(private session: AuthSessionService, private router: Router) {}
 
-  @ViewChild('offcanvasSidebar', { static: false })
-  offcanvasSidebar!: ElementRef;
+  toggleSidebar() {
+    this.toggleSidebarEvent.emit();
+  }
 
+  ngOnInit() {
+    this.userName = this.session.name;
+    this.userRole = this.session.role;
+  }
 
   logout(event?: MouseEvent): void {
     if (event) event.preventDefault();
