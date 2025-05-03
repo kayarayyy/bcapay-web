@@ -62,4 +62,27 @@ export class LoanRequestService {
     return this.http.put<{ message: string }>(`${this.baseUrl}/loan-requests/approvals/${id}`, payload);
   }
 
+  getLoanRequestCount(): Observable<number> {
+    return this.http
+      .get<{ data: number }>(`${this.baseUrl}/loan-requests/disbursement-count`)
+      .pipe(map((response) => response.data));
+  }
+  getLoanRequestFirstDisbursement(): Observable<LoanRequest> {
+    return this.http
+      .get<{ data: LoanRequest }>(`${this.baseUrl}/loan-requests/disbursement`)
+      .pipe(map((response) => response.data));
+  }
+  getLoanRequestByIdDisbursement(id: string): Observable<ReviewLoan> {
+    return this.http
+      .get<{ data: ReviewLoan }>(
+        `${this.baseUrl}/loan-requests/disbursement/${id}`
+      )
+      .pipe(map((response) => response.data));
+  }
+  getAllLoanRequestDisbursementOngoing(): Observable<LoanRequest[]> {
+    return this.http
+      .get<{ data: LoanRequest[] }>(`${this.baseUrl}/loan-requests/disbursement-ongoing`)
+      .pipe(map((response) => response.data));
+  }
+
 }

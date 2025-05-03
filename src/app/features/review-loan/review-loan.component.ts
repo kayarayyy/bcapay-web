@@ -162,7 +162,7 @@ export class ReviewLoanComponent implements OnInit {
                   res.message || 'Sukses merekomendasikan pengajuan!',
                   'success'
                 ).then(() => {
-                  this.router.navigate(['/dashboard/loan-requests']);
+                  this.router.navigate(['/loan-requests']);
                 });
               },
               error: (err) => {

@@ -1,15 +1,22 @@
 import {
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { SidebarComponent } from './sidebar-layout/sidebar-layout.component';
-import { RouterOutlet, Router, RouterModule } from '@angular/router';
+import {
+  RouterOutlet,
+  Router,
+  RouterModule,
+  NavigationEnd,
+} from '@angular/router';
 import { AuthSessionService } from '../../core/services/auth-session.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar-layout/navbar-layout.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,14 +31,64 @@ import { NavbarComponent } from './navbar-layout/navbar-layout.component';
   templateUrl: './main-layout.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class MainLayoutComponent {
-
+export class MainLayoutComponent implements OnInit {
+  currentPath: string = '';
+  currentDateTime: string = '';
 
   constructor(private session: AuthSessionService, private router: Router) {}
 
   @ViewChild('offcanvasSidebar', { static: false })
   offcanvasSidebar!: ElementRef;
 
+  ngOnInit() {
+    // Update path setiap navigasi
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe((e: any) => {
+        const path = e.urlAfterRedirects.split('?')[0];
+        // Buang UUID di akhir
+        const pathParts = path.split('/');
+        if (
+          pathParts.length > 2 &&
+          this.isUUID(pathParts[pathParts.length - 1])
+        ) {
+          pathParts.pop();
+        }
+        this.currentPath = pathParts
+          .map((part: string) => this.capitalize(part))
+          .join(' / ');
+      });
+
+    // Update waktu real-time
+    this.updateDateTime();
+    setInterval(() => this.updateDateTime(), 1000);
+  }
+
+  capitalize(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  updateDateTime() {
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('id-ID', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Jakarta',
+    });
+    this.currentDateTime = formatter.format(now) + ' WIB';
+  }
+
+  isUUID(str: string): boolean {
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      str
+    );
+  }
 
   logout(event?: MouseEvent): void {
     if (event) event.preventDefault();

@@ -1,9 +1,8 @@
 <ul class="nav nav-pills flex-column mb-auto">
   <li class="nav-item">
     <a
-      routerLink="/dashboard/home"
+      routerLink="/dashboard"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link link-dark"
       aria-current="page"
     >
@@ -19,18 +18,27 @@
     "
   >
     <a
-      routerLink="/dashboard/loan-requests"
+      routerLink="/loan-requests"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link link-dark"
     >
       <i class="bi bi-table me-2"></i>
       Loan Requests
     </a>
   </li>
+  <li *ngIf="hasFeature('FEATURE_GET_LOAN_REQUEST_DISBURSEMENT')">
+    <a
+      routerLink="/disbursement"
+      routerLinkActive="active"
+      class="nav-link link-dark"
+    >
+      <i class="bi bi-cash-stack me-2"></i>
+      Disbursement
+    </a>
+  </li>
   <li *ngIf="hasFeature('FEATURE_MANAGE_USERS')">
     <a
-      routerLink="/dashboard/users"
+      routerLink="/users"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link link-dark"
@@ -41,9 +49,8 @@
   </li>
   <li *ngIf="hasFeature('FEATURE_MANAGE_ROLES')">
     <a
-      routerLink="/dashboard/roles"
+      routerLink="/roles"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link link-dark"
     >
       <i class="bi bi-calendar me-2"></i>
@@ -52,9 +59,8 @@
   </li>
   <li *ngIf="hasFeature('FEATURE_MANAGE_BRANCHES')">
     <a
-      routerLink="/dashboard/branches"
+      routerLink="/branches"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link link-dark"
     >
       <i class="bi bi-file-earmark-person-fill me-2"></i>

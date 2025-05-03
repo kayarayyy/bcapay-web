@@ -3,7 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CardComponent } from '../../layout/card-layout/card/card.component';
+import { CardComponent } from '../../shared/components/card/card.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -49,7 +49,7 @@ export class ChangePasswordComponent {
           title: 'Berhasil!',
           text: res.message || 'Password berhasil diubah!',
         }).then(() => {
-          this.router.navigate(['/dashboard/profile']); // Arahkan ke halaman profil setelah sukses
+          this.router.navigate(['/profile']); // Arahkan ke halaman profil setelah sukses
         });
         this.isLoading = false;  // Set loading false setelah selesai
       },
@@ -68,6 +68,6 @@ export class ChangePasswordComponent {
 
 
   goBack() {
-    this.router.navigate(['/dashboard/profile']);
+    this.router.navigate(['/profile']);
   }
 }

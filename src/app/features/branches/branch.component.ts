@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../core/models/branch.model';
 import { BranchService } from '../../core/services/branch.service';
-import { CardComponent } from '../../layout/card-layout/card/card.component';
-import { TableComponent } from '../../layout/table-layout/table/table.component';
+import { CardComponent } from '../../shared/components/card/card.component';
+import { TableComponent } from '../../shared/components/table/table.component';
 
 @Component({
   selector: 'app-branch',
@@ -23,7 +23,7 @@ export class BranchComponent implements OnInit {
     { header: 'Branch Manager', field: 'branchManagerEmail' },
     { header: 'Marketing', field: 'marketingEmails' }
   ];
-  
+
 
   constructor(private branchService: BranchService) { }
 
@@ -43,7 +43,7 @@ export class BranchComponent implements OnInit {
         this.isLoading = false;
       },
     });
-    
+
   }
 
   onPage(event: any) {

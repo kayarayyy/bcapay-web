@@ -4,9 +4,9 @@ import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
-import { CardComponent } from '../../layout/card-layout/card/card.component';
+import { CardComponent } from '../../shared/components/card/card.component';
 import { FormsModule } from '@angular/forms';
-import { TableComponent } from '../../layout/table-layout/table/table.component';
+import { TableComponent } from '../../shared/components/table/table.component';
 
 @Component({
   selector: 'app-user',

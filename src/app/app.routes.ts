@@ -14,16 +14,18 @@ import { ChangePasswordComponent } from './features/change-password/change-passw
 import { ResetPasswordComponent } from './features/reset-password/reset-password.component';
 import { ReviewLoanComponent } from './features/review-loan/review-loan.component';
 import { featureGuard } from './core/guards/feature.gurad';
+import { DisbursementLoanComponent } from './features/disbursement-loan/disbursement-loan.component';
+import { DisbursementDetailComponent } from './features/disbursement-detail/disbursement-detail.component';
 
 export const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: MainLayoutComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: 'home',
+        path: 'dashboard',
         component: HomeComponent,
       },
       {
@@ -52,6 +54,21 @@ export const routes: Routes = [
         ],
       },
       {
+        path: 'disbursement',
+        children: [
+          {
+            path: '',
+            canActivate: [featureGuard('FEATURE_GET_LOAN_REQUEST_DISBURSEMENT')],
+            component: DisbursementLoanComponent,
+          },
+          {
+            path: 'detail/:id',
+            canActivate: [featureGuard('FEATURE_GET_LOAN_REQUEST_BY_ID_DISBURSEMENT')],
+            component: DisbursementDetailComponent,
+          },
+        ]
+      },
+      {
         path: 'roles',
         component: RoleComponent,
         canActivate: [featureGuard('FEATURE_MANAGE_ROLES')],
@@ -59,23 +76,23 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [featureGuard('VIEW_PROFILE')],
+        // canActivate: [featureGuard('VIEW_PROFILE')],
       },
       {
         path: 'change-password',
         component: ChangePasswordComponent,
-        canActivate: [featureGuard('CHANGE_PASSWORD')],
+        // canActivate: [featureGuard('CHANGE_PASSWORD')],
       },
     ],
   },
   // auth layout tetap
   {
-    path: '',
+    path: 'login',
     component: AuthLayoutComponent,
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      // { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
-        path: 'login',
+        path: '',
         component: LoginComponent,
         data: { title: 'Login' },
         canActivate: [redirectIfLoggedInGuard],

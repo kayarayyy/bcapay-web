@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { CardComponent } from '../../layout/card-layout/card/card.component';
-import { TableComponent } from '../../layout/table-layout/table/table.component';
+import { CardComponent } from '../../shared/components/card/card.component';
+import { TableComponent } from '../../shared/components/table/table.component';
 import { LoanRequest } from '../../core/models/loan-request.model';
 import { LoanRequestService } from '../../core/services/loan-request.service';
 import { AuthSessionService } from '../../core/services/auth-session.service';
@@ -137,10 +137,10 @@ export class LoanRequestComponent implements OnInit {
   }
 
   reviewRequest(id: string): void {
-    this.router.navigate(['/dashboard/loan-requests/review/' + id]);
+    this.router.navigate(['/loan-requests/review/' + id]);
   }
   detailRequest(id: string): void {
-    this.router.navigate(['/dashboard/loan-requests/review/' + id]);
+    this.router.navigate(['/loan-requests/review/' + id]);
   }
   actionRequest(id: string): void {
     Swal.fire({

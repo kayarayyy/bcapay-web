@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { CardComponent } from '../../layout/card-layout/card/card.component';
-import { TableComponent } from '../../layout/table-layout/table/table.component';
+import { CardComponent } from '../../shared/components/card/card.component';
+import { TableComponent } from '../../shared/components/table/table.component';
 import { RoleFeature } from '../../core/models/role-feature.model';
 import { RoleFeatureService } from '../../core/services/role-feature.service';
 import { CommonModule } from '@angular/common';
